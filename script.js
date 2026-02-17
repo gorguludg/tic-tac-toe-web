@@ -3,7 +3,13 @@ const statusText = document.getElementById("status");
 const restartBtn = document.getElementById("restart");
 const xScoreDisplay = document.getElementById("x-score");
 const oScoreDisplay = document.getElementById("o-score");
+const modeIndicator = document.getElementById("mode-indicator");
+const symbolSelect = document.getElementById("symbol-select");
+const chooseXBtn = document.getElementById("choose-x");
+const chooseOBtn = document.getElementById("choose-o");
 
+let playerSymbol = "X";
+let computerSymbol = "O";
 let xScore = 0;
 let oScore = 0;
 let vsComputer = false;
@@ -34,12 +40,16 @@ restartBtn.addEventListener("click", restartGame);
 
 pvpBtn.addEventListener("click", () => {
     vsComputer = false;
+    modeIndicator.textContent = "Mode: Player vs Player";
+    symbolSelect.style.display = "none";
     resetScores();
     restartGame();
 });
 
 pvcBtn.addEventListener("click", () => {
     vsComputer = true;
+    modeIndicator.textContent = "Mode: Player vs Computer";
+    symbolSelect.style.display = "block";
     resetScores();
     restartGame();
 });
@@ -73,7 +83,7 @@ function handleCellClick(cell, index) {
     currentPlayer = currentPlayer === "X" ? "O" : "X";
     statusText.textContent = "Player " + currentPlayer + "'s turn";
 
-    if (vsComputer && currentPlayer === "O" && gameActive) {
+    if (vsComputer && currentPlayer === computerSymbol && gameActive) {
         setTimeout(computerMove, 500);
     }
 }
@@ -105,9 +115,9 @@ function restartGame() {
         cell.textContent = "";
         cell.classList.remove("win");
     });
-    currentPlayer = "X";
+    currentPlayer = playerSymbol;
     gameActive = true;
-    statusText.textContent = "Player X's turn";
+    statusText.textContent = "Player " + currentPlayer + "'s turn";
 }
 
 function computerMove() {
@@ -166,3 +176,20 @@ function resetScores() {
     xScoreDisplay.textContent = xScore;
     oScoreDisplay.textContent = oScore;
 }
+
+chooseXBtn.addEventListener("click", () => {
+    playerSymbol = "X";
+    computerSymbol = "O";
+    restartGame();
+});
+
+chooseOBtn.addEventListener("click", () => {
+    playerSymbol = "O";
+    computerSymbol = "X";
+    restartGame();
+
+    if (vsComputer) {
+        currentPlayer = computerSymbol;
+        setTimeout(computerMove, 500);
+    }
+});
