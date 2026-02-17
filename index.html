@@ -10,24 +10,25 @@
     <div class="container">
         <h1>Tic Tac Toe</h1>
 
-        <div id="mode-select">
-            <button id="pvp-btn">Player vs Player</button>
-            <button id="pvc-btn">Player vs Computer</button>
+        <!-- Mode Toggle -->
+        <div class="toggle" id="mode-toggle">
+            <button class="toggle-btn active" id="pvp-btn">PvP</button>
+            <button class="toggle-btn" id="pvc-btn">PvC</button>
         </div>
 
-        <div id="mode-indicator"></div>
-
-        <div id="symbol-select" style="display: none;">
-            <p>Choose Your Symbol:</p>
-            <button id="choose-x">Play as X</button>
-            <button id="choose-o">Play as O</button>
+        <!-- Symbol Toggle (Only visible in PvC) -->
+        <div class="toggle" id="symbol-toggle" style="display: none;">
+            <button class="toggle-btn active" id="choose-x">X</button>
+            <button class="toggle-btn" id="choose-o">O</button>
         </div>
 
+        <!-- Scoreboard -->
         <div id="scoreboard">
             <p>X Wins: <span id="x-score">0</span></p>
             <p>O Wins: <span id="o-score">0</span></p>
         </div>
 
+        <!-- Game Board -->
         <div class="board">
             <div class="cell"></div>
             <div class="cell"></div>

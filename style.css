@@ -15,33 +15,11 @@ body {
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     text-align: center;
     width: 90%;
-    max-width: 600px;   /* increase this */
+    max-width: 600px;
 }
 
 h1 {
     margin-bottom: 15px;
-}
-
-#mode-select {
-    margin-bottom: 15px;
-}
-
-#mode-select button,
-#restart {
-    margin: 5px;
-    padding: 8px 15px;
-    font-size: 0.9rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: #007bff;
-    color: white;
-    transition: background-color 0.2s ease;
-}
-
-#mode-select button:hover,
-#restart:hover {
-    background-color: #0056b3;
 }
 
 #scoreboard {
@@ -100,4 +78,50 @@ h1 {
     .cell {
         font-size: 2.5rem;
     }
+}
+
+/* Toggle Styles */
+
+.toggle {
+    display: inline-flex;
+    border: 2px solid #007bff;
+    border-radius: 30px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.toggle-btn {
+    padding: 8px 20px;
+    border: none;
+    background: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.toggle-btn.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.toggle-btn:not(.active):hover {
+    background-color: #e6f0ff;
+}
+
+#restart {
+    margin-top: 15px;
+    padding: 10px 25px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    border: 2px solid #007bff;
+    border-radius: 30px;
+    background: white;
+    color: #007bff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#restart:hover {
+    background-color: #007bff;
+    color: white;
 }

@@ -1,58 +1,107 @@
 const cells = document.querySelectorAll(".cell");
 const statusText = document.getElementById("status");
 const restartBtn = document.getElementById("restart");
+
 const xScoreDisplay = document.getElementById("x-score");
 const oScoreDisplay = document.getElementById("o-score");
-const modeIndicator = document.getElementById("mode-indicator");
-const symbolSelect = document.getElementById("symbol-select");
+
+const pvpBtn = document.getElementById("pvp-btn");
+const pvcBtn = document.getElementById("pvc-btn");
+
+const symbolToggle = document.getElementById("symbol-toggle");
 const chooseXBtn = document.getElementById("choose-x");
 const chooseOBtn = document.getElementById("choose-o");
 
 let playerSymbol = "X";
 let computerSymbol = "O";
+let vsComputer = false;
+
 let xScore = 0;
 let oScore = 0;
-let vsComputer = false;
+
 let currentPlayer = "X";
 let gameActive = true;
 
-const pvpBtn = document.getElementById("pvp-btn");
-const pvcBtn = document.getElementById("pvc-btn");
-
 const winningCombinations = [
-    [0,1,2],
-    [3,4,5],
-    [6,7,8],
-    [0,3,6],
-    [1,4,7],
-    [2,5,8],
-    [0,4,8],
-    [2,4,6]
+    [0,1,2],[3,4,5],[6,7,8],
+    [0,3,6],[1,4,7],[2,5,8],
+    [0,4,8],[2,4,6]
 ];
 
 statusText.textContent = "Player X's turn";
+
+/* =====================
+   Toggle Helper
+===================== */
+
+function setActiveToggle(clickedBtn, groupElement) {
+    const buttons = groupElement.querySelectorAll(".toggle-btn");
+    buttons.forEach(btn => btn.classList.remove("active"));
+    clickedBtn.classList.add("active");
+}
+
+/* =====================
+   Mode Switching
+===================== */
+
+pvpBtn.addEventListener("click", () => {
+    setActiveToggle(pvpBtn, document.getElementById("mode-toggle"));
+
+    vsComputer = false;
+    symbolToggle.style.display = "none";
+
+    resetScores();
+    restartGame();
+});
+
+pvcBtn.addEventListener("click", () => {
+    setActiveToggle(pvcBtn, document.getElementById("mode-toggle"));
+
+    vsComputer = true;
+    symbolToggle.style.display = "inline-flex";
+
+    resetScores();
+    restartGame();
+});
+
+/* =====================
+   Symbol Selection
+===================== */
+
+chooseXBtn.addEventListener("click", () => {
+    setActiveToggle(chooseXBtn, symbolToggle);
+
+    playerSymbol = "X";
+    computerSymbol = "O";
+
+    resetScores();
+    restartGame();
+});
+
+chooseOBtn.addEventListener("click", () => {
+    setActiveToggle(chooseOBtn, symbolToggle);
+
+    playerSymbol = "O";
+    computerSymbol = "X";
+
+    resetScores();
+    restartGame();
+
+    if (vsComputer) {
+        currentPlayer = computerSymbol;
+        setTimeout(computerMove, 500);
+    }
+});
+
+/* =====================
+   Game Logic
+===================== */
 
 cells.forEach((cell, index) => {
     cell.addEventListener("click", () => handleCellClick(cell, index));
 });
 
 restartBtn.addEventListener("click", restartGame);
-
-pvpBtn.addEventListener("click", () => {
-    vsComputer = false;
-    modeIndicator.textContent = "Mode: Player vs Player";
-    symbolSelect.style.display = "none";
-    resetScores();
-    restartGame();
-});
-
-pvcBtn.addEventListener("click", () => {
-    vsComputer = true;
-    modeIndicator.textContent = "Mode: Player vs Computer";
-    symbolSelect.style.display = "block";
-    resetScores();
-    restartGame();
-});
 
 function handleCellClick(cell, index) {
     if (!gameActive || cell.textContent !== "") return;
@@ -89,8 +138,8 @@ function handleCellClick(cell, index) {
 }
 
 function checkWinner() {
-    for (let combination of winningCombinations) {
-        const [a, b, c] = combination;
+    for (let combo of winningCombinations) {
+        const [a,b,c] = combo;
 
         if (
             cells[a].textContent &&
@@ -115,27 +164,29 @@ function restartGame() {
         cell.textContent = "";
         cell.classList.remove("win");
     });
+
     currentPlayer = playerSymbol;
     gameActive = true;
     statusText.textContent = "Player " + currentPlayer + "'s turn";
 }
 
+/* =====================
+   Smarter AI
+===================== */
+
 function computerMove() {
-    // 1. Try to win
-    let move = findBestMove("O");
+    let move = findBestMove(computerSymbol);
     if (move !== null) {
         cells[move].click();
         return;
     }
 
-    // 2. Block player from winning
-    move = findBestMove("X");
+    move = findBestMove(playerSymbol);
     if (move !== null) {
         cells[move].click();
         return;
     }
 
-    // 3. Otherwise random move
     let emptyCells = [];
     cells.forEach((cell, index) => {
         if (cell.textContent === "") {
@@ -150,8 +201,8 @@ function computerMove() {
 }
 
 function findBestMove(player) {
-    for (let combination of winningCombinations) {
-        const [a, b, c] = combination;
+    for (let combo of winningCombinations) {
+        const [a,b,c] = combo;
         const values = [
             cells[a].textContent,
             cells[b].textContent,
@@ -176,20 +227,3 @@ function resetScores() {
     xScoreDisplay.textContent = xScore;
     oScoreDisplay.textContent = oScore;
 }
-
-chooseXBtn.addEventListener("click", () => {
-    playerSymbol = "X";
-    computerSymbol = "O";
-    restartGame();
-});
-
-chooseOBtn.addEventListener("click", () => {
-    playerSymbol = "O";
-    computerSymbol = "X";
-    restartGame();
-
-    if (vsComputer) {
-        currentPlayer = computerSymbol;
-        setTimeout(computerMove, 500);
-    }
-});
