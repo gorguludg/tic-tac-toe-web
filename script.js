@@ -6,9 +6,12 @@ const oScoreDisplay = document.getElementById("o-score");
 
 let xScore = 0;
 let oScore = 0;
-let vsComputer = true;
+let vsComputer = false;
 let currentPlayer = "X";
 let gameActive = true;
+
+const pvpBtn = document.getElementById("pvp-btn");
+const pvcBtn = document.getElementById("pvc-btn");
 
 const winningCombinations = [
     [0,1,2],
@@ -28,6 +31,18 @@ cells.forEach((cell, index) => {
 });
 
 restartBtn.addEventListener("click", restartGame);
+
+pvpBtn.addEventListener("click", () => {
+    vsComputer = false;
+    resetScores();
+    restartGame();
+});
+
+pvcBtn.addEventListener("click", () => {
+    vsComputer = true;
+    resetScores();
+    restartGame();
+});
 
 function handleCellClick(cell, index) {
     if (!gameActive || cell.textContent !== "") return;
@@ -143,4 +158,11 @@ function findBestMove(player) {
         }
     }
     return null;
+}
+
+function resetScores() {
+    xScore = 0;
+    oScore = 0;
+    xScoreDisplay.textContent = xScore;
+    oScoreDisplay.textContent = oScore;
 }
