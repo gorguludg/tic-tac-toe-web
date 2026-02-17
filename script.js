@@ -1,6 +1,11 @@
 const cells = document.querySelectorAll(".cell");
 const statusText = document.getElementById("status");
 const restartBtn = document.getElementById("restart");
+const xScoreDisplay = document.getElementById("x-score");
+const oScoreDisplay = document.getElementById("o-score");
+
+let xScore = 0;
+let oScore = 0;
 
 let currentPlayer = "X";
 let gameActive = true;
@@ -32,6 +37,15 @@ function handleCellClick(cell, index) {
     if (checkWinner()) {
         statusText.textContent = currentPlayer + " wins!";
         gameActive = false;
+
+        if (currentPlayer === "X") {
+            xScore++;
+            xScoreDisplay.textContent = xScore;
+        } else {
+            oScore++;
+            oScoreDisplay.textContent = oScore;
+        }
+
         return;
     }
 

@@ -38,3 +38,8 @@ button {
 .cell.win {
     background-color: lightgreen;
 }
+
+#scoreboard {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
