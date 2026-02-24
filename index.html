@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <link rel="icon" type="image/png" href="tic-tac-toe.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Tic Tac Toe</h1>
+
+        <!-- Mode Toggle -->
+        <div class="toggle" id="mode-toggle">
+            <button class="toggle-btn active" id="pvp-btn">PvP</button>
+            <button class="toggle-btn" id="pvc-btn">PvC</button>
+        </div>
+
+        <!-- Symbol Toggle (Only visible in PvC) -->
+        <div class="toggle" id="symbol-toggle" style="display: none;">
+            <button class="toggle-btn active" id="choose-x">X</button>
+            <button class="toggle-btn" id="choose-o">O</button>
+        </div>
+
+        <!-- Scoreboard -->
+        <div id="scoreboard">
+            <p>X Wins: <span id="x-score">0</span></p>
+            <p>O Wins: <span id="o-score">0</span></p>
+        </div>
+
+        <!-- Game Board -->
+        <div class="board">
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+        </div>
+
+        <div id="status"></div>
+
+        <button id="restart">Restart Game</button>
+
+        <footer class="footer">
+            <p>
+                Built by <a href="https://github.com/gorguludg" target="_blank">gorguludg</a>
+            </p>
+            <p>
+                <a href="https://github.com/gorguludg/tic-tac-toe" target="_blank">
+                    View Source on GitHub
+                </a>
+            </p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
