@@ -58,7 +58,8 @@ Block - Block opponent's winning move
 Random - Take any remaining cell
 
 👨‍💻 Author
-gorguludg
+**gorguludg**
+- GitHub: [@gorguludg](https://github.com/gorguludg)
 
 GitHub: @gorguludg
 - Android Version: [Tic Tac Toe Android](https://github.com/gorguludg/Tic-Tac-Toe-Android)
