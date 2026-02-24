@@ -4,7 +4,7 @@ A classic Tic Tac Toe game built with HTML, CSS, and JavaScript.
 
 ## 🕹️ Play Now
 
-**[👉 Click Here to Play](https://gorguludg.github.io/tic-tac-toe/)**
+**[👉 Click Here to Play](https://gorguludg.github.io/tic-tac-toe-web/)**
 
 ## 📸 Screenshot
 
@@ -62,4 +62,4 @@ Random - Take any remaining cell
 - GitHub: [@gorguludg](https://github.com/gorguludg)
 
 GitHub: @gorguludg
-- Android Version: [Tic Tac Toe Android](https://github.com/gorguludg/Tic-Tac-Toe-Android)
+- Android Version: [Tic Tac Toe Android](https://github.com/gorguludg/tic-tac-toe-android)
